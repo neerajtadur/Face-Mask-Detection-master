@@ -15,7 +15,7 @@ PreRequisites:
 
 1. Clone the repo:
 
-   $ git clone https://github.com/neerajtadur/FaceMASK-NTadur.git
+   $ git clone https://github.com/neerajtadur/Face-Mask-Detection-master.git
 
 2. Change your directory to the cloned repo:
 
