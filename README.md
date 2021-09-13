@@ -18,7 +18,7 @@ $ git clone https://github.com/neerajtadur/FaceMASK-NTadur.git
 
 2. Change your directory to the cloned repo:
 
-$ cd FaceMASK-NTadur
+$ cd Face-Mask-Detection-master
 
 3. Create a Python virtual environment 'Test' and activate it:
 
