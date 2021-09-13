@@ -34,9 +34,7 @@ PreRequisites:
 
 # Working:
 
-Open terminal. Go into the cloned project directory and type the following command:
-
-Training :
+Open terminal. Go into the cloned project directory and type the following command to train the model:
 
    $ python3 train_mask_detector.py --dataset dataset
 
