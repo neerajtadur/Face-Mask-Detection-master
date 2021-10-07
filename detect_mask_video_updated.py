@@ -146,13 +146,15 @@ while True:
 			#if a >= 30000 and not Tamper:
 			if(a >=int(frame.shape[0])*int(frame.shape[1])/3):
 				cv2.putText(frame,"TAMPERING DETECTED",(5,30),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,255),2)
-				# server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-				# server.login("tadur.sas@gmail.com", "shutterisl@nd2")
-				# server.sendmail("tadur.sas@gmail.com",
-				# 	"neerajtadur@gmail.com",
-				# 	"WARNING, Tampering IDENTIFIED")
-				# server.quit()
-				# Tamper = True
+			if(a >=int(frame.shape[0])*int(frame.shape[1])/2) and not Tamper:
+				cv2.putText(frame,"TAMPERING DETECTED",(5,30),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,255),2)
+				server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+				server.login("atmsec.nomus@gmail.com", "Nomuscomm-123")
+				server.sendmail("atmsec.nomus@gmail.com",
+					"keerthanavadali@gmail.com",
+					"WARNING, Tampering IDENTIFIED")
+				server.quit()
+				Tamper = True
 				
 
 
@@ -162,8 +164,8 @@ while True:
 
 	if no_of_faces > 1 :
 		server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-		server.login("tadur.sas@gmail.com", "shutterisl@nd2")
-		server.sendmail("tadur.sas@gmail.com",
+		server.login("atmsec.nomus@gmail.com", "Nomuscomm-123")
+		server.sendmail("atmsec.nomus@gmail.com",
 					"keerthanavadali@gmail.com",
 					"WARNING, MORE THAN ONE PERSON IS IDENTIFIED")
 		server.quit()
@@ -192,8 +194,8 @@ while True:
 
 		if label == "Face not Visible" and (mask * 100) > 99.50:
 			server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-			server.login("tadur.sas@gmail.com", "shutterisl@nd2")
-			server.sendmail("tadur.sas@gmail.com",
+			server.login("atmsec.nomus@gmail.com", "Nomuscomm-123")
+			server.sendmail("atmsec.nomus@gmail.com",
                 "keerthanavadali@gmail.com",
                 "WARNING, Face is not visible")
 			server.quit()
@@ -213,8 +215,8 @@ while True:
 		cnt = cnt + 1
 		if cnt > 120:
 			server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-			server.login("tadur.sas@gmail.com", "shutterisl@nd2")
-			server.sendmail("tadur.sas@gmail.com",
+			server.login("atmsec.nomus@gmail.com", "Nomuscomm-123")
+			server.sendmail("atmsec.nomus@gmail.com",
 					"keerthanavadali@gmail.com",
 					"WARNING, Loitering Detected")
 			server.quit()
