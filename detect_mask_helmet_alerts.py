@@ -16,6 +16,7 @@ import smtplib
 import datetime
 import time
 
+#Writing a function that detects face and mask
 def detect_and_predict_mask(frame, faceNet, maskNet):
 	# grab the dimensions of the frame and then construct a blob
 	# from it
@@ -112,7 +113,7 @@ fgmask = fgbg.apply(frame)
 kernel = np.ones((5,5), np.uint8)
 time.sleep(2.0)
 
-
+#Main code block that contains all the used cases
 # loop over the frames from the video stream
 hasprinted = False
 Loitering = False
@@ -125,7 +126,8 @@ while True:
 	# to have a maximum width of 400 pixels
 	frame = vs.read()
 	frame = imutils.resize(frame, width=400)
-	# Tamper Detection
+	
+# Tamper Detection code block from line 131 to 159
 	if(frame is None):
 		print("End of frame")
 		break;
@@ -158,14 +160,13 @@ while True:
 				
 
 
-	# detect faces in the frame and determine if they are wearing a
-	# face mask or not
+# function that returns location coordinates, probability scores and no of faces for Mask deetction case
 	(locs, preds, no_of_faces) = detect_and_predict_mask(frame, faceNet, maskNet)
 
-	# detect faces in the frame and determine if they are wearing a
-	# Helmet or not
+# function that returns location coordinates, probability scores and no of faces for Helmet deetction case
 	(locats, predics, tot_face) = detect_and_predict_mask(frame, faceNet, HelmetNet)
 
+# Code block from line 170 to 180 sends a warning email if more than one face is detected
 	if no_of_faces > 1 :
 		server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
 		server.login("atmsec.nomus@gmail.com", "Nomuscomm-123")
@@ -178,6 +179,7 @@ while True:
 		print("Only one face found")
 		hasprinted = True
 	
+#Code block from line 186 to 217 detects face mask and sends a warning email if the face is not visible
 	
 	# loop over the detected face locations and their corresponding
 	# locations
@@ -214,6 +216,9 @@ while True:
 		cv2.putText(frame, no_of_people, (startX, startY - 40),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 2)
 
+	
+#Code block from line 222 to 248 detects helmet and sends a warning email if the face is not visible
+	
 	for (box1, pred1) in zip(locats, predics):
 		# unpack the bounding box and predictions
 		(startX1, startY1, endX1, endY1) = box1
@@ -243,6 +248,8 @@ while True:
 		cv2.rectangle(frame, (startX1, startY1), (endX1, endY1), color, 2)
 
 
+#Code block from line 253 to 263 sends a warning email if a person is seen for more than 120 system generated seconds
+	
 	if no_of_faces > 0 :
 		cnt = cnt + 1
 		if cnt > 120:
